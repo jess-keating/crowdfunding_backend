@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import Fundraiser
+from .serializers import FundraiserSerializer
 
-# Create your views here.
+class FundraiserList(generics.ListCreateAPIView):
+    queryset = Fundraiser.objects.all()
+    serializer_class = FundraiserSerializer
