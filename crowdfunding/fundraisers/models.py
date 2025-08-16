@@ -7,6 +7,15 @@ class Fundraiser(models.Model):
     image = models.URLField()
     is_open = models.BooleanField()
     date_create = models.DateTimeField(auto_now_add=True)
-    
 
-# Create your models here.
+class Pledge(models.Model):
+    amount = models.IntegerField()
+    comment = models.CharField(max_length=200)
+    anonymous = models.BooleanField()
+    fundraiser = models.ForeignKey(
+        'Fundraiser',
+        related_name='pledges',
+        on_delete=models.CASCADE
+    )
+
+

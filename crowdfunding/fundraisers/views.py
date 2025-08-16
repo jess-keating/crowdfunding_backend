@@ -2,9 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
-from .models import Fundraiser
-from .serializers import FundraiserSerializer
+from .models import Fundraiser, Pledge
+from .serializers import FundraiserSerializer, PledgeSerializer
 
+
+# Fundraiser views below
 class FundraiserList(APIView):
     def get(self, request):
         fundraisers = Fundraiser.objects.all()
@@ -33,4 +35,18 @@ class FundraiserDetail(APIView):
             serializer = FundraiserSerializer(fundraiser)
             return Response(serializer.data )
 
+
+#________Pledge views below________
+class PledgeList(APIView):
+    def get(self, request):
+        pledges = Pledge.objects.all()
+        serializer = PledgeSerializer(pledges, many=True)
+        return Response(serializer.data)
     
+    def post(self, request):
+        serializer = PledgeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

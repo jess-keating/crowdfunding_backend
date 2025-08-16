@@ -37,17 +37,18 @@ Campaigns are focused, short-term, and tangible—such as hiring LED stage light
 
 ### API Spec
 
-| URL                  | HTTP Method | Purpose                           | Request Body  | Success Response Code | Authentication/Authorisation                 |
-| -------------------- | ----------- | --------------------------------- | ------------- | --------------------- | --------------------------------------------- |
-| /fundraisers/        | GET         | Fetch all the fundraisers         | N/A           | 200                   | None                                          |
-| /fundraisers/        | POST        | Create a new fundraiser           | JSON Payload  | 201                   | Any logged in user                            |
-| /fundraisers/1/      | GET         | Fetch a single fundraiser by ID   | N/A           | 200                   | None                                          |
-| /pledges/            | POST        | Create a new pledge               | JSON Payload  | 201                   | Any logged in user                            |
-| /pledges/1/          | DELETE      | Delete an existing pledge by ID   | N/A           | 204                   | Pledge owner or admin                         |
-| /users/              | POST        | Register a new user                      | JSON Payload            | 201                   | None                         |
-| /users/login/        | POST        | Authenticate and log in a user           | JSON Payload (email/password) | 200              | None                         |
-| /users/profile/      | GET         | Retrieve logged-in user's profile        | N/A                     | 200                   | Authenticated user only      |
-| /users/logout/       | POST        | Log out the current user                 | N/A                     | 204                   | Authenticated user only      |
+| URL             | HTTP Method | Purpose                           | Request Body                  | Success Response Code | Authentication/Authorisation |
+| --------------- | ----------- | --------------------------------- | ----------------------------- | --------------------- | ---------------------------- |
+| /fundraisers/   | GET         | Fetch all the fundraisers         | N/A                           | 200                   | None                         |
+| /fundraisers/   | POST        | Create a new fundraiser           | JSON Payload                  | 201                   | Any logged in user           |
+| /fundraisers/1/ | GET         | Fetch a single fundraiser by ID   | N/A                           | 200                   | None                         |
+| /pledge/        | GET         | Fetch all pledges                 | N/A                           | 200                   | (?)                          |
+| /pledges/       | POST        | Create a new pledge               | JSON Payload                  | 201                   | Any logged in user           |
+| /pledges/1/     | DELETE      | Delete an existing pledge by ID   | N/A                           | 204                   | Pledge owner or admin        |
+| /users/         | POST        | Register a new user               | JSON Payload                  | 201                   | None                         |
+| /users/login/   | POST        | Authenticate and log in a user    | JSON Payload (email/password) | 200                   | None                         |
+| /users/profile/ | GET         | Retrieve logged-in user's profile | N/A                           | 200                   | Authenticated user only      |
+| /users/logout/  | POST        | Log out the current user          | N/A                           | 204                   | Authenticated user only      |
 
 ### DB Schema
-![]( {{ ./relative/path/to/your/schema/image.png }} )
+![](./database.drawio.svg)
