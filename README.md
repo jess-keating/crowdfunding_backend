@@ -31,6 +31,7 @@ Campaigns are focused, short-term, and tangible—such as hiring LED stage light
 - **Fundraiser Detail Page**
   - Display full description, target, progress, and pledges
   - Pledge form for logged-in users
+  - Show all pledges made so far
 - **User Account Pages**
   - Sign up / Log in
   - View user’s own fundraisers and pledges
