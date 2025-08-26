@@ -4,7 +4,7 @@ Jessica Keating
 ## Planning:
 ### Concept/Name
 **LightUp** is a crowdfunding platform for community groups, schools, theatres, and event organisers to raise funds for lighting, sound, and stage production needs.  
-Campaigns are focused, short-term, and tangible—such as hiring LED stage lights, microphones, or projectors for a specific event.
+Campaigns are focused, short-term, and tangible. Such as hiring stage lights, microphones, or projectors for a specific event.
 
 ### Intended Audience/User Stories
 **Intended Audience**
