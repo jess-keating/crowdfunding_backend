@@ -14,11 +14,11 @@ Campaigns are focused, short-term, and tangible. Such as hiring stage lights, mi
 - Supporters wanting to directly contribute to creative, local events
 
 **User Stories**
-1. As a **community organiser**, I want to create a fundraiser so I can gather financial support for my event production needs.  
+1. As a **visitor**, I want to view open fundraisers so I can discover projects to support.  
 2. As a **supporter**, I want to pledge to a fundraiser so I can help make a local event happen.  
 3. As a **supporter**, I want to choose to pledge anonymously so I can keep my contribution private.  
-4. As a **fundraiser owner**, I want to update my campaign details so I can keep supporters informed.  
-5. As a **fundraiser owner**, I want to close my campaign when the funding target is met.
+4. As a **fundraiser owner**, I want to update my fundraiser details so I can keep supporters informed.  
+5. As a **fundraiser owner**, I want to close my fundrasier when the funding target is met.
 
 ### Front End Pages/Functionality
 - **Home Page**
@@ -38,18 +38,20 @@ Campaigns are focused, short-term, and tangible. Such as hiring stage lights, mi
 
 ### API Spec
 
-| URL             | HTTP Method | Purpose                           | Request Body                  | Success Response Code | Authentication/Authorisation |
-| --------------- | ----------- | --------------------------------- | ----------------------------- | --------------------- | ---------------------------- |
-| /fundraisers/   | GET         | Fetch all the fundraisers         | N/A                           | 200                   | None                         |
-| /fundraisers/   | POST        | Create a new fundraiser           | JSON Payload                  | 201                   | Any logged in user           |
-| /fundraisers/1/ | GET         | Fetch a single fundraiser by ID   | N/A                           | 200                   | None                         |
-| /pledge/        | GET         | Fetch all pledges                 | N/A                           | 200                   | (?)                          |
-| /pledges/       | POST        | Create a new pledge               | JSON Payload                  | 201                   | Any logged in user           |
-| /pledges/1/     | DELETE      | Delete an existing pledge by ID   | N/A                           | 204                   | Pledge owner or admin        |
-| /users/         | POST        | Register a new user               | JSON Payload                  | 201                   | None                         |
-| /users/login/   | POST        | Authenticate and log in a user    | JSON Payload (email/password) | 200                   | None                         |
-| /users/profile/ | GET         | Retrieve logged-in user's profile | N/A                           | 200                   | Authenticated user only      |
-| /users/logout/  | POST        | Log out the current user          | N/A                           | 204                   | Authenticated user only      |
+| URL                | HTTP Method | Purpose                        | Request Body                              | Success Code | Error Codes & Reasons                                                                   | Auth Required        |
+| ------------------ | ----------- | ------------------------------ | ----------------------------------------- | ------------ | --------------------------------------------------------------------------------------- | -------------------- |
+| /api-token-auth/   | POST        | Obtain authentication token    | username, password                        | 200          | 400 (invalid credentials)                                                               | No                   |
+| /users/            | GET         | List all users                 | N/A                                       | 200          | None                                                                                    | No                   |
+| /users/            | POST        | Register a new user            | username, email, password                 | 201          | 400 (invalid/missing fields)                                                            | No                   |
+| /users/{id}/       | GET         | Retrieve user details by ID    | N/A                                       | 200          | 404 (user not found)                                                                    | No                   |
+| /fundraisers/      | GET         | List all fundraisers           | N/A                                       | 200          | None                                                                                    | No                   |
+| /fundraisers/      | POST        | Create a new fundraiser        | title, description, goal_amount, image    | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes (logged in)      |
+| /fundraisers/{id}/ | GET         | Retrieve fundraiser details    | N/A                                       | 200          | 404 (fundraiser not found)                                                              | No                   |
+| /fundraisers/{id}/ | PUT         | Update fundraiser (owner only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not owner), 404 (fundraiser not found)    | Yes (owner only)     |
+| /pledges/          | GET         | List all pledges               | N/A                                       | 200          | None                                                                                    | No                   |
+| /pledges/          | POST        | Create a pledge                | amount, comment, anonymous, fundraiser_id | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes (logged in)      |
+| /pledges/{id}/     | GET         | Retrieve pledge details        | N/A                                       | 200          | 404 (pledge not found)                                                                  | No                   |
+| /pledges/{id}/     | PUT         | Update pledge (supporter only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not pledge owner), 404 (pledge not found) | Yes (supporter only) |
 
 ### DB Schema
 ![](./database.drawio.svg)
