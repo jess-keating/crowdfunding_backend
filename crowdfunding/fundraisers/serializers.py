@@ -31,7 +31,7 @@ class PledgeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = apps.get_model("fundraisers.Pledge")
-        fields = ["__all__", "is_active"]
+        fields = "__all__"
 
 
 class FundraiserDetailSerializer(FundraiserSerializer):

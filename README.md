@@ -55,3 +55,24 @@ Campaigns are focused, short-term, and tangible. Such as hiring stage lights, mi
 
 ### DB Schema
 ![](./database.drawio.svg)
+
+### Heroku Deployed: https://lightup-38603a824c6f.herokuapp.com/ 
+### Insomnia Request Screenshots
+
+**Successful GET**
+![](.//images/GET-Fetch-all-users.png)
+![](.//images/GET-Fetch-all-fundraisers.png)
+![](.//images/GET-Fetch-all-pledges.png)
+
+**Successful POST**
+![](.//images/POST-Create-new-user.png)
+![](.//images/POST-Create-new-fundraiser.png)
+![](.//images/POST-Create-new-pledge-(not-my-fundraiser).png)
+
+**Returning Auth Token**
+![](.//images/POST-Get-auth-token.png)
+
+**Successful PUT**
+![](.//images/PUT-Update-fundraiser-(as-owner).png)
+![](.//images/PUT-Update-pledge.png) 
+
