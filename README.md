@@ -90,6 +90,7 @@ Create a New Pledge
 
 Update a Fundraiser
 ![](./images/PUT-Update-fundraiser-(as-owner).png) 
+
 Update a Pledge 
 ![](./images/PUT-Update-pledge.png)  
 
@@ -121,7 +122,7 @@ python manage.py runserver # when in the same folder as manage.py
 }
 ```
 
-1. Click Send. A successful response returns 201 Created with the new user object.
+4. Click Send. A successful response returns 201 Created with the new user object.
 
 
 **Creating a New Fundraiser in Insomnia**
