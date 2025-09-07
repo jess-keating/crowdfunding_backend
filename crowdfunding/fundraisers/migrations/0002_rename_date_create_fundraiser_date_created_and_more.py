@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='fundraiser',
-            old_name='date_create',
-            new_name='date_created',
-        ),
+        #migrations.RenameField(
+        # model_name='fundraiser',
+            #old_name='date_create',
+            #new_name='date_created',
+    # ),
         migrations.AddField(
             model_name='fundraiser',
             name='is_active',
