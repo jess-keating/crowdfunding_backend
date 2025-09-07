@@ -45,34 +45,84 @@ Campaigns are focused, short-term, and tangible. Such as hiring stage lights, mi
 | /users/            | POST        | Register a new user            | username, email, password                 | 201          | 400 (invalid/missing fields)                                                            | No                   |
 | /users/{id}/       | GET         | Retrieve user details by ID    | N/A                                       | 200          | 404 (user not found)                                                                    | No                   |
 | /fundraisers/      | GET         | List all fundraisers           | N/A                                       | 200          | None                                                                                    | No                   |
-| /fundraisers/      | POST        | Create a new fundraiser        | title, description, goal_amount, image    | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes (logged in)      |
+| /fundraisers/      | POST        | Create a new fundraiser        | title, description, goal, image           | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes                  |
 | /fundraisers/{id}/ | GET         | Retrieve fundraiser details    | N/A                                       | 200          | 404 (fundraiser not found)                                                              | No                   |
-| /fundraisers/{id}/ | PUT         | Update fundraiser (owner only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not owner), 404 (fundraiser not found)    | Yes (owner only)     |
+| /fundraisers/{id}/ | PUT         | Update fundraiser (owner only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not owner), 404 (fundraiser not found)    | Yes – owner only     |
 | /pledges/          | GET         | List all pledges               | N/A                                       | 200          | None                                                                                    | No                   |
-| /pledges/          | POST        | Create a pledge                | amount, comment, anonymous, fundraiser_id | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes (logged in)      |
+| /pledges/          | POST        | Create a pledge                | amount, comment, anonymous, fundraiser_id | 201          | 400 (invalid data), 401 (not logged in)                                                 | Yes                  |
 | /pledges/{id}/     | GET         | Retrieve pledge details        | N/A                                       | 200          | 404 (pledge not found)                                                                  | No                   |
-| /pledges/{id}/     | PUT         | Update pledge (supporter only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not pledge owner), 404 (pledge not found) | Yes (supporter only) |
+| /pledges/{id}/     | PUT         | Update pledge (supporter only) | fields to update                          | 200          | 400 (invalid data), 401 (not logged in), 403 (not pledge owner), 404 (pledge not found) | Yes – supporter only |
 
 ### DB Schema
 ![](./database.drawio.svg)
 
-### Heroku Deployed: https://lightup-38603a824c6f.herokuapp.com/ 
+### Heroku Deployment
+(https://lightup-38603a824c6f.herokuapp.com/)
+
 ### Insomnia Request Screenshots
 
 **Successful GET**
-![](.//images/GET-Fetch-all-users.png)
-![](.//images/GET-Fetch-all-fundraisers.png)
-![](.//images/GET-Fetch-all-pledges.png)
+All Users
+![](./images/GET-Fetch-all-users.png) 
+All Fundraisers 
+![](./images/GET-Fetch-all-fundraisers.png)  
+All Pledges
+![](./images/GET-Fetch-all-pledges.png)  
 
 **Successful POST**
-![](.//images/POST-Create-new-user.png)
-![](.//images/POST-Create-new-fundraiser.png)
-![](.//images/POST-Create-new-pledge-(not-my-fundraiser).png)
+Create a New User
+![](./images/POST-Create-new-user.png)  
+Create a New Fundraiser
+![](./images/POST-Create-new-fundraiser.png)  
+Create a New Pledge
+![](./images/POST-Create-new-pledge-(not-my-fundraiser).png)  
 
 **Returning Auth Token**
-![](.//images/POST-Get-auth-token.png)
+![](./images/POST-Get-auth-token.png)  
 
 **Successful PUT**
-![](.//images/PUT-Update-fundraiser-(as-owner).png)
-![](.//images/PUT-Update-pledge.png) 
+Update a Fundraiser
+![](./images/PUT-Update-fundraiser-(as-owner).png) 
+Update a Pledge 
+![](./images/PUT-Update-pledge.png)  
 
+### Instructions for Creating a New User and New Fundraiser
+
+**Prerequisites**
+Using Insomnia you can either use the deployed site link (`https://lightup-38603a824c6f.herokuapp.com/`) or your local host (`http://127.0.0.1:8000/` or `http://localhost:8000`).  
+
+For local setup on Mac:
+source venv/bin/activate   # when inside your /venv/ folder
+python manage.py runserver # when in the same folder as manage.py
+
+**Creating a New User in Insomnia**
+1. Open Insomnia and create a new POST request.
+2. Set the URL to: https://lightup-38603a824c6f.herokuapp.com/users/ 
+3. In the Body tab, set type to JSON and paste: 
+{
+	"username": "user",
+	"email": "user@user.com",
+	"password": "password"
+}
+4. Click Send. A successful response returns 201 Created with the new user object.
+
+**Creating a New Fundraiser in Insomnia**
+Retrieve an authentication token for the new user:
+1. Create a POST request to:  https://lightup-38603a824c6f.herokuapp.com/api-token-auth/
+2. In the Body tab, set type to JSON and paste:
+{
+	"username": "user",
+	"password": "password"
+}
+3. Click Send. A successful response returns 200 OK and includes a token.
+4. Copy the token and use it for authentication in the next request. Create a new POST request to: https://lightup-38603a824c6f.herokuapp.com/fundraisers/. On this request go to the Auth tab, select Bearer Token and set your token here.
+5. In the Body tab, set type to JSON and paste:
+{
+	"title": “A Fundraiser Event",
+	"description": “Local Event,
+	"goal": 2000,
+	"image": "https://via.placeholder.com/300.jpg",
+	"is_open": true,
+	"is_active": true
+}
+6. Click Send. A successful response returns 201 Created with the fundraiser details.
