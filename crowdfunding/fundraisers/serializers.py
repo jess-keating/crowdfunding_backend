@@ -27,7 +27,8 @@ class PledgeSerializer(serializers.ModelSerializer):
         All model fields
         supporter: Read-only field linking to user ID
     """
-    supporter = serializers.ReadOnlyField(source="supporter.id")
+    supporter = serializers.ReadOnlyField(source="supporter.id") #shows user id
+    supporter = serializers.ReadOnlyField(source='supporter.username')  # shows username
 
     class Meta:
         model = apps.get_model("fundraisers.Pledge")
